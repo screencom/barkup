@@ -40,7 +40,7 @@ func (x Postgres) Export() *ExportResult {
 	// Export without extension. The manual renaming can add an extension later on
 	result.Path = fmt.Sprintf(`bu_%v_%v.sql`, x.DB, time.Now().Unix())
 	options := append(x.dumpOptions(), fmt.Sprintf(`-f%v`, result.Path))
-	out, err := exec.Command(PGDumpCmd, options...).Output()
+	out, err := exec.Command(PGDumpCmd, options...).CombinedOutput()
 	if err != nil {
 		result.Error = makeErr(err, string(out))
 	}
