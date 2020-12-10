@@ -36,7 +36,7 @@ func Test_ExportRestult_To_Move(t *testing.T) {
 	file, _ := os.Create("to_mv_test")
 	defer file.Close()
 
-	e := ExportResult{"to_mv_test", "text/plain", nil}
+	e := ExportResult{"to_mv_test", "text/plain", nil, ""}
 	storeErr := e.To("test/", nil)
 	expect(t, storeErr, (*Error)(nil))
 
@@ -60,14 +60,14 @@ func (x *StoreFailureStory) Store(r *ExportResult, d string) *Error {
 
 func Test_ExportRestult_To_Store(t *testing.T) {
 	_, _ = os.Create("test/test.txt")
-	e := &ExportResult{"test/test.txt", "text/plain", nil}
+	e := &ExportResult{"test/test.txt", "text/plain", nil, ""}
 	err := e.To("test/", &StoreSuccessStory{})
 	expect(t, err, (*Error)(nil))
 }
 
 func Test_ExportRestult_To_Store_Fail(t *testing.T) {
 	_, _ = os.Create("test/test.txt")
-	e := &ExportResult{"test/test.txt", "text/plain", nil}
+	e := &ExportResult{"test/test.txt", "text/plain", nil, ""}
 	err := e.To("test/", &StoreFailureStory{})
 	refute(t, err, (*Error)(nil))
 }

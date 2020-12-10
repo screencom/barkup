@@ -50,6 +50,8 @@ type ExportResult struct {
 	MIME string
 	// Any error that occured during `Export()`
 	Error *Error
+	// The standard out of the backup operation
+	Stdout string
 }
 
 // To hands off an ExportResult to a `Storer` interface and invokes its Store() method. The directory argument is passed along too. If `store` is `nil`, the the method will simply move the export result to the specified directory (via the `mv` command)

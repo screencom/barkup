@@ -45,12 +45,13 @@ func (x MySQL) Export() *ExportResult {
 	}
 
 	result.Path = dumpPath + ".tar.gz"
-	_, err = exec.Command(TarCmd, "-czf", result.Path, dumpPath).Output()
+	out, err = exec.Command(TarCmd, "-czf", result.Path, dumpPath).Output()
 	if err != nil {
 		result.Error = makeErr(err, string(out))
 		return result
 	}
 	os.Remove(dumpPath)
+	result.Stdout = string(out)
 
 	return result
 }

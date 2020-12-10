@@ -44,6 +44,7 @@ func (x Postgres) Export() *ExportResult {
 	if err != nil {
 		result.Error = makeErr(err, string(out))
 	}
+	result.Stdout = string(out)
 	return result
 }
 
